@@ -145,7 +145,6 @@
             font-weight: 600;
             background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
             color: white;
-            /*margin-top: 35px;*/
             transition: all 0.3s ease;
             box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
             letter-spacing: 0.5px;
@@ -262,7 +261,6 @@
         .success h2 {
             background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
             webkit-background-clip: text;
-            /*webkit-text-fill-color: transparent;*/
             background-clip: text;
             font-size: 2.0em;
             margin-bottom: 25px;
@@ -321,6 +319,7 @@
             <h1>✨ Para: Cristina ✨</h1>
             
             <img src="./nosotros.jpg" alt="mis ojitos de cushuro" style="width: 200px; height: 200px; object-fit: cover; border-radius: 50%; margin: 20px auto; display: block; border: 5px solid #ff6b9d; box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);">
+
             <p class="message">
                 Hola mi vida, tengo algo que decirte hoy...
             </p>
@@ -336,7 +335,7 @@
             </p>
             
             <p class="message">
-                Y no son simples fechas, es un recordatorio de cuánto te quiero, mi amor..
+                Y no solo simples fechas, son recordatorios de cuánto te quiero, mi amor..
             </p>
             
             <p class="question">
@@ -379,13 +378,11 @@
     <script>
         let noClickCount = 0;
         const funnyMessages = [
-            "Uy, creo que el botón se resbaló 😅",
-            "Este botón se lo comió la Lina 🐱",
-            "Creo que hay fallas técnicas... 🤔",
-            "Este botón se perdió debajo de tu cama 🛏️",
+            "Uy, el botón se resbaló 😅",
+            "Mmm, creo que hay fallas técnicas... 🤔",
             "Mejor intenta con el otro botón 💭",
-            "Este botón se perdió como el DNI de Don Constantino👴🏼",
-            "¿Segura que no? Porque yo no lo estoy 😏",
+            "Ese botón está rebelde como la Lina 🐱",
+            "Estás segura 'NO'? Porque no lo creo 😏",
             "Yo sé que me quieres decir que SÍ... 😌",
             "Ríndete, no podrás escapar 💪✨"
         ];
@@ -421,6 +418,12 @@
             
             noClickCount++;
             
+            if (noClickCount > funnyMessages.length) {
+                btnNo.style.display = 'none';
+                messageElement.textContent = '¡Solo queda una opción! 💕';
+                return;
+            }
+
             const messageIndex = Math.min(noClickCount - 1, funnyMessages.length - 1);
             messageElement.textContent = funnyMessages[messageIndex];
             
@@ -428,11 +431,19 @@
             const containerRect = container.getBoundingClientRect();
             
             const safeAreaTop = 100;
-            const maxX = containerRect.width - btnNo.offsetWidth - 10;
-            const maxY = containerRect.height - btnNo.offsetHeight - 10;
+            const maxX = containerRect.width - btnNo.offsetWidth - 40;
+            const maxY = containerRect.height - btnNo.offsetHeight - 40;
             
-            const randomX = Math.random() * maxX - (maxX / 2);
-            const randomY = safeAreaTop + (Math.random() * (maxY - safeAreaTop));
+            const corners = [
+                { x: -maxX/2, y: safeAreaTop },
+                { x: maxX/2, y: safeAreaTop },
+                { x: -maxX/2, y: maxY },
+                { x: maxX/2, y: maxY }
+            ];
+
+            const randomCorner = corners[Math.floor(Math.random() * corners.length)];
+            const randomX = randomCorner.x;
+            const randomY = randomCorner.y;
             
             btnNo.style.left = '50%';
             btnNo.style.top = randomY + 'px';
