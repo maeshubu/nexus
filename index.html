@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una pregunta especial para Cristina 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 50%, #6c5b7b 100%);
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 107, 157, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(192, 108, 132, 0.3) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Corazones flotantes de fondo */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 24px;
+            animation: float 6s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 50px 40px;
+            border-radius: 35px;
+            box-shadow: 
+                0 25px 70px rgba(255, 107, 157, 0.3),
+                0 10px 30px rgba(192, 108, 132, 0.2),
+                inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            text-align: center;
+            max-width: 550px;
+            width: 100%;
+            position: relative;
+            z-index: 2;
+            animation: slideIn 0.6s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            color: #ff6b9d;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            animation: pulse 2s infinite;
+            font-weight: 700;
+            text-shadow: 0 2px 10px rgba(255, 107, 157, 0.2);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .from {
+            color: #c06c84;
+            font-size: 1.3em;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .step {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .btn-continue {
+            padding: 18px 50px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            font-weight: 600;
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+            color: white;
+            /*margin-top: 35px;*/
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-continue:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .message {
+            font-size: 1.35em;
+            color: #4a4a4a;
+            margin: 30px 0;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .question {
+            font-size: 1.9em;
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 35px 0;
+            font-weight: 700;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            position: relative;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0;
+        }
+
+        button {
+            padding: 18px 40px;
+            font-size: 1.3em;
+            border: none;
+            border-radius: 60px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff6b9d 0%, #ff8fab 100%);
+            color: white;
+            position: relative;
+            z-index: 10;
+        }
+
+        .btn-yes:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn-no {
+            background: linear-gradient(135deg, #e0e0e0 0%, #f5f5f5 100%);
+            color: #888;
+            position: absolute;
+            top: 90px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 5;
+        }
+
+        .funny-message {
+            margin-top: 25px;
+            color: #ff6b9d;
+            font-size: 1.15em;
+            font-weight: 600;
+            min-height: 30px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .success {
+            display: none;
+        }
+
+        .success.show {
+            display: block;
+            animation: celebration 0.8s ease-out;
+        }
+
+        @keyframes celebration {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .success h2 {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c06c84 100%);
+            webkit-background-clip: text;
+            /*webkit-text-fill-color: transparent;*/
+            background-clip: text;
+            font-size: 2.0em;
+            margin-bottom: 25px;
+            font-weight: 700;
+        }
+
+        .success p {
+            font-size: 1.35em;
+            color: #4a4a4a;
+            line-height: 1.7;
+        }
+
+        .emoji {
+            font-size: 3em;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .message {
+                font-size: 1.1em;
+            }
+
+            .question {
+                font-size: 1.5em;
+            }
+
+            button {
+                padding: 12px 30px;
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+    
+    <div class="container">
+        <!-- Paso 1 -->
+        <div id="step1" class="step">
+            <h1>✨ Para: Cristina ✨</h1>
+            
+            <p class="message">
+                Hola mi vida, tengo algo que decirte hoy...
+            </p>
+            
+            <button class="btn-continue" onclick="goToStep2()">Continuar 💭</button>
+        </div>
+
+        <!-- Paso 2 -->
+        <div id="step2" class="step" style="display: none;">
+            <h1>💫</h1>
+            
+            <p class="message">
+                Febrero se ha vuelto un mes que me habla de ti. El 6 celebramos un mes más juntos y este 14 será nuestro primer San Valentín; dos fechas que me recuerdan lo mucho que significas para mí.
+            </p>
+            
+            <p class="message">
+                Y no solo es una fecha, es un recordatorio de cuánto te quiero, mi amor..
+            </p>
+            
+            <p class="question">
+                ¿Seguimos?
+            </p>
+            
+            <button class="btn-continue" onclick="goToStep3()">Claro que sí 💕</button>
+        </div>
+
+        <!-- Paso 3 -->
+        <div id="step3" class="step" style="display: none;">
+            <h1>💝</h1>
+            <p class="from">Mi amor</p>
+            
+            <p class="message">
+                Gracias por llegar a mi vida y hacerla más bonita. No necesito más que seguir compartiendo contigo. Y deseo mucho que este 14 sea nuestro y el primero de muchos que nos encuentren juntos.
+            </p>
+            
+            <p class="question">
+                ¿Quieres ser mi San Valentín? 💘
+            </p>
+            
+            <div class="buttons">
+                <button class="btn-yes" onclick="handleYes()">Sí, mi amor 💖</button>
+                <button class="btn-no" id="btnNo" onclick="handleNo()">Mmm no sé...</button>
+            </div>
+            
+            <p class="funny-message" id="funnyMessage"></p>
+        </div>
+        
+        <!-- Mensaje final -->
+        <div class="success" id="successSection"><br>
+            <h1>SIIIIIUUUU!!!🎉💕</h1><br>
+            <h2>¡Sabía que ibas a decir que SÍ, mis ojitos de cushuro! 😍</h2>
+            <p>Gracias por aceptar, amor mío.</p>
+            <p>Tu "SÍ" significa más de lo que imaginas. Porque no es solo para hoy, es para todo lo que quiero vivir contigo. 💕✨</p><br>
+            <p>TE QUIERO DEMASIADO 💞</p><br><br>
+            <p>Atte. Esteban 👨🏽</p><br>
+        </div>
+    </div>
+
+    <script>
+        let noClickCount = 0;
+        const funnyMessages = [
+            "Uy, creo que el mouse se resbaló 😅",
+            "Este botón se lo comió la Lina 🐱",
+            "Creo que hay fallas técnicas... 🤔",
+            "Este botón se perdió debajo de tu cama 🛏️",
+            "Mejor intenta con el otro botón 💭",
+            "Este botón se perdió como el DNI de Don Constantino👴🏼",
+            "¿Segura que no? Porque yo no lo estoy 😏",
+            "Yo sé que me quieres decir que SÍ... 😌",
+            "Ríndete, no podrás escapar 💪✨"
+        ];
+
+        // Crear corazones flotantes
+        function createHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 15; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💕';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 6 + 's';
+                heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                heartsContainer.appendChild(heart);
+            }
+        }
+
+        createHearts();
+
+        function goToStep2() {
+            document.getElementById('step1').style.display = 'none';
+            document.getElementById('step2').style.display = 'block';
+        }
+
+        function goToStep3() {
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('step3').style.display = 'block';
+        }
+
+        function handleNo() {
+            const btnNo = document.getElementById('btnNo');
+            const messageElement = document.getElementById('funnyMessage');
+            
+            noClickCount++;
+            
+            // Mostrar mensaje divertido
+            const messageIndex = Math.min(noClickCount - 1, funnyMessages.length - 1);
+            messageElement.textContent = funnyMessages[messageIndex];
+            
+            // Mover el botón a una posición aleatoria dentro del área segura
+            const container = document.querySelector('.buttons');
+            const containerRect = container.getBoundingClientRect();
+            
+            // Definir área segura (debajo del botón SI y con márgenes)
+            const safeAreaTop = 100; // Espacio para el botón SI
+            const maxX = containerRect.width - btnNo.offsetWidth - 40;
+            const maxY = containerRect.height - btnNo.offsetHeight - 40;
+            
+            // Generar posición aleatoria en área segura
+            const randomX = Math.random() * maxX - (maxX / 2);
+            const randomY = safeAreaTop + (Math.random() * (maxY - safeAreaTop));
+            
+            btnNo.style.left = '50%';
+            btnNo.style.top = randomY + 'px';
+            btnNo.style.transform = `translateX(calc(-50% + ${randomX}px))`;
+        }
+
+        function handleYes() {
+            document.getElementById('step3').style.display = 'none';
+            document.getElementById('successSection').classList.add('show');
+            
+            // Crear más corazones para la celebración
+            createMoreHearts();
+        }
+
+        function createMoreHearts() {
+            const heartsContainer = document.getElementById('hearts');
+            for (let i = 0; i < 30; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = ['💕', '💖', '💗', '💘'][Math.floor(Math.random() * 4)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDelay = Math.random() * 2 + 's';
+                heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                heart.style.opacity = '0.6';
+                heartsContainer.appendChild(heart);
+            }
+        }
+    </script>
+</body>
+</html>
