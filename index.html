@@ -384,7 +384,7 @@
             "Ese botón está rebelde como la Lina 🐱",
             "Estás segura 'NO'? Porque no lo creo 😏",
             "Yo sé que me quieres decir que SÍ... 😌",
-            "Ríndete, no podrás escapar 💪✨"
+            "Desapareciendo en 3,2,1...😶‍🌫️"
         ];
 
         function createHearts() {
@@ -412,6 +412,8 @@
             document.getElementById('step3').style.display = 'block';
         }
 
+        let lastCornerIndex = -1;
+
         function handleNo() {
             const btnNo = document.getElementById('btnNo');
             const messageElement = document.getElementById('funnyMessage');
@@ -423,7 +425,7 @@
                 messageElement.textContent = '¡Solo queda una opción! 💕';
                 return;
             }
-
+            
             const messageIndex = Math.min(noClickCount - 1, funnyMessages.length - 1);
             messageElement.textContent = funnyMessages[messageIndex];
             
@@ -441,13 +443,17 @@
                 { x: maxX/2, y: maxY }
             ];
 
-            const randomCorner = corners[Math.floor(Math.random() * corners.length)];
-            const randomX = randomCorner.x;
-            const randomY = randomCorner.y;
+            let newCornerIndex;
+            do {
+                newCornerIndex = Math.floor(Math.random() * corners.length);
+            } while (newCornerIndex === lastCornerIndex && corners.length > 1);
+            
+            lastCornerIndex = newCornerIndex;
+            const randomCorner = corners[newCornerIndex];
             
             btnNo.style.left = '50%';
-            btnNo.style.top = randomY + 'px';
-            btnNo.style.transform = `translateX(calc(-50% + ${randomX}px))`;
+            btnNo.style.top = randomCorner.y + 'px';
+            btnNo.style.transform = `translateX(calc(-50% + ${randomCorner.x}px))`;
         }
 
         function handleYes() {
