@@ -395,7 +395,6 @@
             "Ríndete, no podrás escapar 💪✨"
         ];
 
-        // Crear corazones flotantes
         function createHearts() {
             const heartsContainer = document.getElementById('hearts');
             for (let i = 0; i < 15; i++) {
@@ -427,20 +426,16 @@
             
             noClickCount++;
             
-            // Mostrar mensaje divertido
             const messageIndex = Math.min(noClickCount - 1, funnyMessages.length - 1);
             messageElement.textContent = funnyMessages[messageIndex];
             
-            // Mover el botón a una posición aleatoria dentro del área segura
             const container = document.querySelector('.buttons');
             const containerRect = container.getBoundingClientRect();
             
-            // Definir área segura (debajo del botón SI y con márgenes)
-            const safeAreaTop = 100; // Espacio para el botón SI
+            const safeAreaTop = 100;
             const maxX = containerRect.width - btnNo.offsetWidth - 10;
             const maxY = containerRect.height - btnNo.offsetHeight - 10;
             
-            // Generar posición aleatoria en área segura
             const randomX = Math.random() * maxX - (maxX / 2);
             const randomY = safeAreaTop + (Math.random() * (maxY - safeAreaTop));
             
@@ -453,7 +448,6 @@
             document.getElementById('step3').style.display = 'none';
             document.getElementById('successSection').classList.add('show');
             
-            // Crear más corazones para la celebración
             createMoreHearts();
         }
 
